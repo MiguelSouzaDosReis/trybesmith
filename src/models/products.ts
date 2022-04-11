@@ -20,7 +20,7 @@ export default class CRUDProducts implements Iproducts {
   }
 
   getAll = async () => {
-    const querry = 'SELECT * FROM Trybesmith.Products ';
+    const querry = 'SELECT * FROM Trybesmith.Products';
     const [results] = await this.Connection.execute<RowDataPacket[]>(querry);
   
     return results as Products[];
