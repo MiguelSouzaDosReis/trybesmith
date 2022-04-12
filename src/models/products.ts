@@ -1,4 +1,4 @@
-import { Pool, RowDataPacket } from 'mysql2/promise';
+import { Pool, RowDataPacket, ResultSetHeader } from 'mysql2/promise';
 
 type Products = {
   id: number,
@@ -24,5 +24,15 @@ export default class CRUDProducts implements Iproducts {
     const [results] = await this.Connection.execute<RowDataPacket[]>(querry);
   
     return results as Products[];
+  };
+
+  create = async (name: string, amount: string) => {
+    const querry = 'INSERT INTO Trybesmith.Products (name, amount) VALUES (?,?)';
+    const [results] = await this.Connection.execute<ResultSetHeader>(
+      querry, 
+      [name, amount],
+    );
+    const id = results.insertId;
+    return { item: { id, name, amount } };
   };
 }

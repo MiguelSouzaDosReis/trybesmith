@@ -8,4 +8,11 @@ const everthing = async (_req: Request, res: Response) => {
   res.status(200).json(products);
 };
 
+export const create = async (req: Request, res: Response) => {
+  const { name, amount } = req.body;
+  const products = await new CRUDProducts(connection).create(name, amount);
+
+  res.status(201).json(products);
+};
+
 export default everthing;
