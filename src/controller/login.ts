@@ -10,7 +10,6 @@ const createLogin = async (req: Request, res: Response) => {
     algorithm: 'HS256',
   };
   const login = await new CRUDUsers(connection).getUser(username, password);
-  console.log(login);
   if (login.length) {
     const jwtToken = jwt.sign({ username }, 'segredo', jwtConfig);
     return res.status(200).json({ token: jwtToken });

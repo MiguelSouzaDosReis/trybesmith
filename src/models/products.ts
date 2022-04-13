@@ -28,10 +28,7 @@ export default class CRUDProducts implements Iproducts {
 
   create = async (name: string, amount: string) => {
     const querry = 'INSERT INTO Trybesmith.Products (name, amount) VALUES (?,?)';
-    const [results] = await this.Connection.execute<ResultSetHeader>(
-      querry, 
-      [name, amount],
-    );
+    const [results] = await this.Connection.execute<ResultSetHeader>(querry, [name, amount]);
     const id = results.insertId;
     return { item: { id, name, amount } };
   };

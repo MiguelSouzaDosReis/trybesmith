@@ -1,4 +1,4 @@
-import { Pool, RowDataPacket } from 'mysql2/promise';
+import { Pool, RowDataPacket, ResultSetHeader } from 'mysql2/promise';
 
 interface Iorder {
   Connection: Pool
@@ -24,5 +24,18 @@ export default class CRUDOrder implements Iorder {
     const [results] = await this.Connection.execute<RowDataPacket[]>(querry);
   
     return results;
+  };
+
+  create = async (products: number[], username: string) => {
+    const querryUser = 'SELECT id from Trybesmith.Users WHERE username = (?)';
+    const [results] = await this.Connection.execute<RowDataPacket[]>(querryUser, [username]);
+    const userId = results[0].id;
+    const querryOrderUser = 'INSERT INTO Trybesmith.Orders (userId) VALUES (?)';
+    const [results2] = await this.Connection.execute<ResultSetHeader>(querryOrderUser, [userId]);
+    console.log(results2);
+    const querryOrderProdutcs = 'UPDATE Trybesmith.Products SET orderId = (?) WHERE id = (?)';
+    await Promise.all(products.map((element) => this.Connection
+      .execute<ResultSetHeader>(querryOrderProdutcs, [results2.insertId, element])));
+    return { order: { userId, products } };
   };
 }

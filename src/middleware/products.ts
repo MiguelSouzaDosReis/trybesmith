@@ -27,4 +27,19 @@ export const validAmountProducts = async (req:Request, res:Response, next:NextFu
   }
   next();
 };
+
+export const validAProducts = async (req:Request, res:Response, next:NextFunction) => {
+  const { products } = req.body;
+  if (!products) { return res.status(400).json({ error: 'Products is required' }); }
+
+  if (!Array.isArray(products)) {
+    return res.status(422).json({ error: 'Products must be an array of numbers' });
+  }
+
+  if (products.length < 1) { 
+    return res.status(422).json({ error: 'Products can\'t be empty' }); 
+  }
+  next();
+};
+
 export default validNameProducts;
