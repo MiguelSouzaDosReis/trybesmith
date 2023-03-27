@@ -1,6 +1,6 @@
 # Project Trybesmith
 
-Nesse projeto eu aprendi a utilizar a linguagem typerscript, para solucionar os desafios proposto pela Trybe. Você pode ver as minhas soluções na pasta src
+Nesse projeto, pude aprimorar meus conhecimentos em TypeScript, uma linguagem que acrescenta tipagem estática ao JavaScript, trazendo mais segurança e organização ao código. Utilizei essa linguagem para resolver os desafios propostos pela Trybe, aplicando conceitos como interfaces, tipos e classes. As soluções desenvolvidas podem ser encontradas na pasta src.
 
 ### 1 - Crie um endpoint para a listagem de produtos
 
